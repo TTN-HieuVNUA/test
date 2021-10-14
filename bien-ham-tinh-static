@@ -1,0 +1,84 @@
+#include<iostream>
+#include<stdio.h>
+
+using namespace std;
+
+//Khai bao lop sinh vien
+class SinhVien
+{
+    private:
+        int maSV;
+        char ten[8];
+        float diemTBC;
+        static int stt;
+
+    public:
+        void nhap();
+        void hien();
+        static int laySL();
+};
+
+//Dinh nghia bien cua lop
+int SinhVien::stt=10;
+
+//===chuong trinh chinh===
+int main()
+{
+    //Khai bao bien
+    SinhVien *ds[100];
+    char traLoi;
+    int i=0,n;
+
+    //Nhap
+    do
+    {
+        //Tao doi tuong sinh vien
+        ds[i] = new SinhVien;
+
+        //Nhap thong tin
+        ds[i++]->nhap();
+
+        //Hoi
+        cout<<"\nCo nhap tiep khong(c/k)? ";
+        cin>>traLoi;
+    }
+    while(traLoi=='c' || traLoi=='C');
+
+    //Lay so luong sv da nhap
+    n = SinhVien::laySL();
+
+    //Dua ra
+    cout<<"\n\nDa nhap "<<n<<" sinh vien";
+    cout<<"\nDanh sach sinh vien da nhap la:\n\n";
+    for(i=0;i<n;i++)
+    {
+        ds[i]->hien();
+        cout<<"\n\n";
+    }
+
+    cout<<endl;
+    return 0;
+}
+//===dinh nghia ham===
+void SinhVien::nhap()
+{
+    //Tao ma sinh vien tu dong tu bien tinh stt
+    maSV = ++SinhVien::stt;
+    cout<<"Ma sinh vien: "<<maSV;
+
+    //Nhap
+    cout<<"\nNhap vao ten sinh vien: "; cin>>ten;
+    cout<<"Diem TBC: "; cin>>diemTBC;
+}
+
+void SinhVien::hien()
+{
+    cout<<"Ma sinh vien: "<<maSV;
+    cout<<"\nTen sinh vien: "<<ten;
+    cout<<"\nDiem TBC: "<<diemTBC;
+}
+
+int SinhVien::laySL()
+{
+    return SinhVien::stt-10;
+}
