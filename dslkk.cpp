@@ -33,6 +33,11 @@ int main(){
         lists.insert(x);
     }
     lists.display();
+    cout<<"\nnhap vao bien x can tim: ";
+    cin>>x;
+    lists.remove(x);
+    cout<<"\nds sau khi xoa\n";
+    lists.display();
     return 0;
 }
 
@@ -89,12 +94,65 @@ bool List::insert(int x)
 
 bool List::search(int x)
 {
-
+    if(F==NULL)
+    {
+        cout<<"ds rong!";
+        return false;
+    }
+    else
+    {
+        node *P = F;
+        while(P!= NULL)
+        {
+            if(P->infor==x)
+            {
+                return true;
+                break;
+            }
+            else
+            {
+                P = P->R;
+            }
+        }
+    }
     return false;
 }
 
 bool List::remove(int x)
 {
-
+    if(search(x) == false)
+    {
+        cout<<"\nko tim thay x";
+        return false;
+    }
+    else
+    {
+        node *P = F;
+        if(P->infor==x)
+        {
+            F = F->R;
+            F->L=NULL;
+            delete P;
+            return true;
+        }
+        else
+        {
+            while(P!=NULL)
+            {
+                if(P->infor==x)
+                {
+                    node *M = P;
+                    M = M->L;
+                    M->R = P->R;
+                    delete P;
+                    return true;
+                }
+                else
+                {
+                    P = P->R;
+                }
+            }
+        }
+    }
     return false;
 }
