@@ -33,6 +33,7 @@ class List
     public:
         List();
         ~List();
+        void insert(Image img);
         Image findAImageByName(string imageName);
         Image findAImageByLocation(string location);
         Image showAImageMaxView();
@@ -42,6 +43,11 @@ class List
 //==== chuong trinh chinh
 int main()
 {
+    Image img[100];
+    List list;
+    Image imgs;
+    ifstream fin("image.txt");
+    
 
     cout<<endl;
     return 0;
@@ -150,4 +156,17 @@ void List::disPlay()
         P->infor.showInfor();
         P=P->link;
     }
+}
+
+void List::insert(Image img)
+{
+    node *N = new node;
+    N->infor = img;
+    N->link = NULL;
+    node *P = F;
+    while(P->link != NULL)
+    {
+        P = P->link;
+    }
+    P -> link = N;
 }
